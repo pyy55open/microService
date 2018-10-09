@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/pyy5open/springcloud_trial
+          username: 411149987@qq.com
+          password: csy665789987
+eureka:
+  client:
+    service-url:
+      defalutzone: http://localhost:8761/eureka/
