@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 //import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
-@EnableFeignClients(basePackages = "com.csy.product.client")
+@EnableFeignClients
 @SpringBootApplication
 @EnableDiscoveryClient
 //@EnableCircuitBreaker

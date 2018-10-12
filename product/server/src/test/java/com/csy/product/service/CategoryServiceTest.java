@@ -23,7 +23,7 @@ public class CategoryServiceTest extends ProductApplicationTests {
 
     @Test
     public void findByCategoryTypeIn() throws Exception {
-        List<ProductCategory> list = categoryService.findByCategoryTypeIn(Arrays.asList(11, 22));
+        List<ProductCategory> list = categoryService.findByCategoryIdIn(Arrays.asList(1L, 2L));
         Assert.assertTrue(list.size() > 0);
     }
 

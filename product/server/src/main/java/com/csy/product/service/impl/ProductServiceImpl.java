@@ -1,5 +1,7 @@
 package com.csy.product.service.impl;
 
+import com.csy.product.common.DecreaseStockInput;
+import com.csy.product.dataobject.Product;
 import com.csy.product.dataobject.ProductInfo;
 import com.csy.product.repository.ProductInfoRepository;
 import com.csy.product.service.ProductService;
@@ -31,9 +33,34 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private AmqpTemplate amqpTemplate;
 
+    @Override
+    public List<Product> findUpAll() {
+        return null;
+    }
 
     @Override
-    public List<ProductInfo> findUpAll() {
-        return null;
+    public List<Product> findList(List<Long> productIdList) {
+        return productInfoRepository.findByProductidIn(productIdList);
+    }
+
+    @Override
+    public void decreaseStock(List<DecreaseStockInput> decreaseStockInputList) {
+        for (DecreaseStockInput decreaseStockInput: decreaseStockInputList) {
+            Optional<Product> productInfoOptional = productInfoRepository.findById(decreaseStockInput.getProductId());
+            //判断商品是否存在
+            if (!productInfoOptional.isPresent()){
+                throw new ProductException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+            Product product = productInfoOptional.get();
+            //库存是否足够
+            Integer result = product.getStock() - decreaseStockInput.getProductQuantity();
+            if (result < 0) {
+                throw new ProductException(ResultEnum.PRODUCT_STOCK_ERROR);
+            }
+            product.setStock(result);
+            productInfoRepository.save(product);
+
+            amqpTemplate.convertAndSend("productInfo",JsonUtil.toJson(product));
+        }
     }
 }

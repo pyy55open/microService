@@ -21,8 +21,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
 
+
     @Override
-    public List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList) {
-        return productCategoryRepository.findByCategoryTypeIn(categoryTypeList);
+    public List<ProductCategory> findByCategoryIdIn(List<Long> categoryidList) {
+        return productCategoryRepository.findByCategoryIdIn(categoryidList);
     }
 }

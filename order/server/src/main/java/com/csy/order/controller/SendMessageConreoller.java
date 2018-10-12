@@ -7,29 +7,26 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Created by 廖师兄
- * 2018-02-13 18:20
- */
+import java.util.Date;
+
 @RestController
-public class SendMessageController {
+public class SendMessageConreoller {
 
     @Autowired
     private StreamClient streamClient;
 
 //    @GetMapping("/sendMessage")
-//    public void process() {
-//        String message = "now " + new Date();
-//        streamClient.output().send(MessageBuilder.withPayload(message).build());
+//    public void sendMessage(){
+//        streamClient.output().send(MessageBuilder.withPayload("now"+new Date()).build());
 //    }
 
     /**
-     * 发送 orderDTO对象
+     * 发送OrderDTO对象
      */
-    @GetMapping("/sendMessage")
-    public void process() {
+    @GetMapping("/sendMessage2")
+    public void sendMessage2(){
         OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setOrderId("123456");
+        orderDTO.setOrderId("12345");
         streamClient.output().send(MessageBuilder.withPayload(orderDTO).build());
     }
 }

@@ -1,6 +1,7 @@
 package com.csy.product.service;
 
 import com.csy.product.ProductApplicationTests;
+import com.csy.product.dataobject.Product;
 import com.csy.product.dataobject.ProductInfo;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class ProductServiceTest extends ProductApplicationTests {
 
     @Test
     public void findUpAll() throws Exception {
-        List<ProductInfo> list = productService.findUpAll();
+        List<Product> list = productService.findUpAll();
         Assert.assertTrue(list.size() > 0);
     }
 

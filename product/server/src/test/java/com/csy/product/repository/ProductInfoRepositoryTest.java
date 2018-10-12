@@ -1,5 +1,6 @@
 package com.csy.product.repository;
 
+import com.csy.product.dataobject.Product;
 import com.csy.product.dataobject.ProductInfo;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,13 +25,14 @@ public class ProductInfoRepositoryTest {
 
     @Test
     public void findByProductStatus() throws Exception {
-        List<ProductInfo> list = productInfoRepository.findByProductStatus(0);
+        List<Product> list = productInfoRepository.findByEnableStatus(0);
         Assert.assertTrue(list.size() > 0);
     }
 
     @Test
     public void findByProductIdIn() throws Exception {
-        List<ProductInfo> list = productInfoRepository.findByProductIdIn(Arrays.asList("157875196366160022", "157875227953464068"));
+        List<Product> list = productInfoRepository.findByProductidIn(Arrays.asList(1L, 2L));
+        System.out.println(list.get(0).getProductname());
         Assert.assertTrue(list.size() > 0);
     }
 

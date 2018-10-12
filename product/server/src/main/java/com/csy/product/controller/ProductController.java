@@ -1,5 +1,7 @@
 package com.csy.product.controller;
 
+import com.csy.product.common.DecreaseStockInput;
+import com.csy.product.dataobject.Product;
 import com.csy.product.dataobject.ProductCategory;
 import com.csy.product.dataobject.ProductInfo;
 import com.csy.product.service.CategoryService;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,7 +43,7 @@ public class ProductController {
     @GetMapping("/list")
     public ResultVO<ProductVO> list() {
         //1. 查询所有在架的商品
-        List<ProductInfo> productInfoList = productService.findUpAll();
+        List<Product> productInfoList = productService.findUpAll();
 
         //4. 构造数据
         List<ProductVO> productVOList = new ArrayList<>();
@@ -48,4 +51,13 @@ public class ProductController {
         return ResultVOUtil.success(productVOList);
     }
 
+    @PostMapping("/list4list")
+    public List<Product> list4List(@RequestBody List<Long> productidList) {
+        return productService.findList(productidList);
+    }
+
+    @PostMapping("/decrease")
+    public void decreaseStock(@RequestBody List<DecreaseStockInput> decreaseStockInputList) {
+        productService.decreaseStock(decreaseStockInputList);
+    }
 }
