@@ -16,6 +16,21 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+    getProductList:
+      execution:
+              isolation:
+                thread:
+                  timeoutInMilliseconds: 3000
+feign:
+  hystrix:
+    enabled: true
 #    stream:
 #      bindings:
 #        myMessage:

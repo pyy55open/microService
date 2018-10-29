@@ -53,6 +53,11 @@ public class ProductController {
 
     @PostMapping("/list4list")
     public List<Product> list4List(@RequestBody List<Long> productidList) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return productService.findList(productidList);
     }
 

@@ -10,15 +10,15 @@ import org.springframework.context.annotation.ComponentScan;
 
 //import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
+//@SpringBootApplication
+//@EnableDiscoveryClient
 @EnableFeignClients
-@SpringBootApplication
-@EnableDiscoveryClient
-//@EnableCircuitBreaker
-//@SpringCloudApplication
-//@ComponentScan(basePackages = "com.csy")
+@SpringCloudApplication
 public class OrderApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(OrderApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(OrderApplication.class, args);
+    }
 }
+
+

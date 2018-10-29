@@ -3,6 +3,7 @@ package com.csy.product.common;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Created by 廖师兄
@@ -11,26 +12,133 @@ import java.math.BigDecimal;
 @Data
 public class ProductInfoOutput {
 
-    private String productId;
+    private Long productid;
 
-    /** 名字. */
-    private String productName;
+    private String productname;
 
-    /** 单价. */
-    private BigDecimal productPrice;
+    private String productdesc;
 
-    /** 库存. */
-    private Integer productStock;
+    private String imgaddr;
 
-    /** 描述. */
-    private String productDescription;
+    private String normalprice;
 
-    /** 小图. */
-    private String productIcon;
+    private String promotionprice;
 
-    /** 状态, 0正常1下架. */
-    private Integer productStatus;
+    private Integer level;
 
-    /** 类目编号. */
-    private Integer categoryType;
+    private Integer stock;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private Integer enableStatus;
+
+    private String productCategoryid;
+
+    private String shopid;
+
+    public Long getProductid() {
+        return productid;
+    }
+
+    public void setProductid(Long productid) {
+        this.productid = productid;
+    }
+
+    public String getProductname() {
+        return productname;
+    }
+
+    public void setProductname(String productname) {
+        this.productname = productname;
+    }
+
+    public String getProductdesc() {
+        return productdesc;
+    }
+
+    public void setProductdesc(String productdesc) {
+        this.productdesc = productdesc;
+    }
+
+    public String getImgaddr() {
+        return imgaddr;
+    }
+
+    public void setImgaddr(String imgaddr) {
+        this.imgaddr = imgaddr;
+    }
+
+    public String getNormalprice() {
+        return normalprice;
+    }
+
+    public void setNormalprice(String normalprice) {
+        this.normalprice = normalprice;
+    }
+
+    public String getPromotionprice() {
+        return promotionprice;
+    }
+
+    public void setPromotionprice(String promotionprice) {
+        this.promotionprice = promotionprice;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Integer getEnableStatus() {
+        return enableStatus;
+    }
+
+    public void setEnableStatus(Integer enableStatus) {
+        this.enableStatus = enableStatus;
+    }
+
+    public String getProductCategoryid() {
+        return productCategoryid;
+    }
+
+    public void setProductCategoryid(String productCategoryid) {
+        this.productCategoryid = productCategoryid;
+    }
+
+    public String getShopid() {
+        return shopid;
+    }
+
+    public void setShopid(String shopid) {
+        this.shopid = shopid;
+    }
 }

@@ -55,8 +55,22 @@ public class OrderServiceImpl implements OrderService {
         if (!orderMasterOptional.isPresent()) {
             throw new OrderException(ResultEnum.ORDER_NOT_EXIST);
         }
-
+        //校验订单状态
+        OrderMaster order = orderMasterOptional.get();
+        if(order.getOrderStatus() != OrderStatusEnum.NEW.getCode()){
+            throw new OrderException(ResultEnum.ORDER_STATUS_ERROR);
+        }
+        //修改订单状态
+        order.setOrderStatus(OrderStatusEnum.FINISHED.getCode());
+        orderMasterRepository.save(order);
+        //查询订单详情
+        List<OrderDetail> detailsList = orderDetailRepository.findByOrderId(orderId);
+        if(CollectionUtils.isEmpty(detailsList)){
+            throw new OrderException(ResultEnum.ORDER_DETAIL_NOT_EXIST);
+        }
         OrderDTO orderDTO = new OrderDTO();
+        BeanUtils.copyProperties(order,orderDTO);
+        orderDTO.setOrderDetailList(detailsList);
         return orderDTO;
     }
 

@@ -1,6 +1,7 @@
 package com.csy.product.service.impl;
 
 import com.csy.product.common.DecreaseStockInput;
+import com.csy.product.common.ProductInfoOutput;
 import com.csy.product.dataobject.Product;
 import com.csy.product.dataobject.ProductInfo;
 import com.csy.product.repository.ProductInfoRepository;
@@ -45,6 +46,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void decreaseStock(List<DecreaseStockInput> decreaseStockInputList) {
+        List<ProductInfoOutput> productInfoOutputList = decreaseStockMsg(decreaseStockInputList);
+        amqpTemplate.convertAndSend("productInfo",JsonUtil.toJson(productInfoOutputList));
+    }
+
+    @Transactional
+    public List<ProductInfoOutput> decreaseStockMsg(List<DecreaseStockInput> decreaseStockInputList) {
+        List<ProductInfoOutput> productInfoOutputList = new ArrayList<ProductInfoOutput>();
         for (DecreaseStockInput decreaseStockInput: decreaseStockInputList) {
             Optional<Product> productInfoOptional = productInfoRepository.findById(decreaseStockInput.getProductId());
             //判断商品是否存在
@@ -59,8 +67,10 @@ public class ProductServiceImpl implements ProductService {
             }
             product.setStock(result);
             productInfoRepository.save(product);
-
-            amqpTemplate.convertAndSend("productInfo",JsonUtil.toJson(product));
+            ProductInfoOutput productInfoOutput = new ProductInfoOutput();
+            BeanUtils.copyProperties(product,productInfoOutput);
+            productInfoOutputList.add(productInfoOutput);
         }
+        return productInfoOutputList;
     }
 }
